@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>진법 변환 / 계산 문제 사이트</title>
+    <link rel="stylesheet" href="css/font.css">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <style>
+        * {
+            margin : 0;
+            padding : 0;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .buttons button {
+            width : 90vw;
+            font-size: 1.75em;
+            padding: 20px;
+            margin : 10px 0;
+            border : 1px solid rgb(199, 199, 199);
+            border-radius: 10px;
+            background-color: #FAFAFA;
+
+            transition: 1s;
+        }
+
+        .buttons button:hover {
+            box-shadow: 1px 1px rgb(187, 187, 187);
+            transform: scale(1.01);
+        }
+        p {
+            text-align: center;
+            font-weight: bold;
+        }
+        p del {
+            color :rgb(187, 187, 187);
+        }
+    </style>
+</head>
+<body>
+    <!-- <h1>진법 변환 / 계산 문제 사이트</h1> -->
+    <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_hk63stcp.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px; margin: 0 auto;"  loop  autoplay></lottie-player>
+    <p><del>즐거운</del> 진법 공부를 합시다.</p>
+    <div class="buttons">
+        <button onclick="location.href = './change.html'">진법 변환 문제</button>
+        <button onclick="location.href = './cell.html'">2진수의 계산</button>
+    </div>
+</body>
+</html>
