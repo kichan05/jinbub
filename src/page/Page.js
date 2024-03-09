@@ -3,8 +3,7 @@ import {UI_ACTION_TYPE, useUiDispatch, useUiState} from "../context/UiReducer";
 import Button from "../component/Button";
 import {PageBasicStyle} from "../style/BasicStyle";
 import {useEffect, useState} from "react";
-import {LuImagePlus} from "react-icons/lu";
-import {IconButton} from "../component/IconButton";
+import Input from "../component/Input";
 
 const PageStyle = styled.div`
   ${PageBasicStyle};
@@ -33,6 +32,20 @@ const Page = () => {
     answerNumSystem: null,
   })
 
+  const [answerInput, setAnswerInput] = useState("")
+  const onAnswerInput = (e) => {
+    setAnswerInput(e.target.value)
+  }
+  const onCheckAnswer = (e) => {
+    if(answerInput === data.answerNum) {
+      alert("정답")
+      init()
+    }
+    else {
+      alert("오답")
+    }
+  }
+
   function init() {
     let problemNumSystem, answerNumSystem
     while (problemNumSystem === answerNumSystem) {
@@ -51,6 +64,8 @@ const Page = () => {
       answerNum,
       answerNumSystem,
     })
+
+    setAnswerInput("")
   }
 
   useEffect(() => {
@@ -60,12 +75,14 @@ const Page = () => {
   return (
     <PageStyle>
       <div className="content">
-        {data.problemNum}({data.problemNumSystem}) -> {data.answerNum}({data.answerNumSystem})
+        {data.problemNum}({data.problemNumSystem}) -> ???({data.answerNumSystem})
 
         <br/>
         {data.problemNum_10}
+        <br/>
+        <Input value={answerInput} onChange={onAnswerInput}/>
 
-        <Button onClick={() => init()}>클릭</Button>
+        <Button onClick={onCheckAnswer}>클릭</Button>
       </div>
     </PageStyle>
   )
