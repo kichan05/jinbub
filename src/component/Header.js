@@ -12,7 +12,7 @@ const HeaderStyle = styled.header`
   & > div {
     width: 100%;
     height: 100%;
-    max-width: ${p => p.theme.size.mobileMaxWidth}px;
+    // max-width: ${p => p.theme.size.mobileMaxWidth}px;
 
     padding: 20px 16px;
     margin: 0 auto;
@@ -33,7 +33,7 @@ const Header = () => {
   return (
     <HeaderStyle ref={headerElement}>
       <div>
-        <h1>헤더</h1>
+        <h1>진법 변환 연습</h1>
       </div>
     </HeaderStyle>
   )
