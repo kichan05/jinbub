@@ -11,7 +11,8 @@ const PageStyle = styled.div`
   ${PageBasicStyle};
 
   & > .content {
-    padding-top: 20px;
+    padding: 20px 0;
+    min-height: calc(100 * var(--vh) - var(--header-height) - var(--footer-height));
   }
 
   .problem-wrap {
@@ -63,14 +64,18 @@ const Page = () => {
   }, [])
 
 
-  const onCheckAnswer = useCallback((e) => {
-    if (answerInput === data.answerNum) {
+  const onCheckAnswer = e => {
+    if (answerInput.length <= 0) {
+      return
+    }
+
+    if (answerInput.toUpperCase() === data.answerNum) {
       alert("정답")
       init()
     } else {
       alert("오답")
     }
-  }, [])
+  }
 
   function init() {
     let problemNumSystem, answerNumSystem
@@ -118,7 +123,7 @@ const Page = () => {
             value={answerInput} onChange={onAnswerInput}
             placeholder={"정답"}
           />
-          <Button onClick={onCheckAnswer}>클릭</Button>
+          <Button onClick={onCheckAnswer}>입력</Button>
         </div>
       </div>
     </PageStyle>
