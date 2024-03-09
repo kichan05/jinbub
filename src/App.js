@@ -8,15 +8,12 @@ import UiSection from "./section/UiSection";
 import React from "react";
 import {UiContextProvider} from "./context/UiReducer";
 import Page from "./page/Page";
-
-const Test = styled.div`
-  height: var(--footer-height);
-  background-color: #f00;
-`
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   return (
     <div className="App">
+      <Analytics/>
       <ThemeProvider theme={Theme}>
         <GlobalStyle/>
         <Resize/>
