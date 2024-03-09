@@ -35,13 +35,19 @@ const PageStyle = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    
+    transition: 200ms;
   }
-
+  
   .message {
     color: ${p => p.theme.color.Gray6};
     text-align: center;
 
     margin-top: 20px;
+  }
+  
+  .answer {
+    color: ${p => p.theme.color.Blue4};
   }
 
   .error-message-wrap {
@@ -99,6 +105,8 @@ const Page = () => {
     isShow: false
   })
 
+  const [isAnswer, setAnswer] = useState(false)
+
   const [answerInput, setAnswerInput] = useState("")
   const onAnswerInput = useCallback((e) => {
     setAnswerInput(e.target.value)
@@ -111,8 +119,15 @@ const Page = () => {
     }
 
     if (answerInput.toUpperCase() === data.answerNum) {
-      alert("정답")
-      init()
+      setAnswer(true)
+      setErrorAnimation({
+        isAnimation: false,
+        isShow: false
+      })
+
+      setTimeout(() => {
+        init()
+      }, 1000)
     } else {
       setErrorAnimation({
         isAnimation: true,
@@ -152,6 +167,7 @@ const Page = () => {
       isShow: false
     })
     setAnswerInput("")
+    setAnswer(false)
   }
 
   useEffect(() => {
@@ -161,15 +177,19 @@ const Page = () => {
   return (
     <PageStyle>
       <div className="content">
-        <div className="problem-wrap">
-          <b>{data.problemNum}</b> <Sub>{data.problemNumSystem}</Sub>
+        <div className={`problem-wrap ${isAnswer && 'answer'}`}>
+          {!isAnswer ? (
+            <>
+              <b>{data.problemNum}</b> <Sub>{data.problemNumSystem}</Sub>
 
-          <CgArrowRight/>
+              <CgArrowRight/>
 
-          <b>???</b> <Sub>{data.answerNumSystem}</Sub>
+              <b>???</b> <Sub>{data.answerNumSystem}</Sub>
+            </>
+          ) : <h1>정답</h1>}
         </div>
 
-        <div className="message">
+        <div className={`message ${isAnswer && 'answer'}`}>
           다음 주를 주어진 진법에 맞게 변환하세요.
         </div>
 
