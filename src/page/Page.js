@@ -190,7 +190,7 @@ const Page = () => {
         </div>
 
         <div className={`message ${isAnswer && 'answer'}`}>
-          다음 주를 주어진 진법에 맞게 변환하세요.
+          다음 수를 주어진 진법에 맞게 변환하세요.
         </div>
 
         <div className={`error-message-wrap ${(errorAnimation.isAnimation) && 'error-animation'} ${(errorAnimation.isShow) && 'error-show'}`}>
