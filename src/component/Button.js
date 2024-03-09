@@ -47,10 +47,6 @@ const ButtonStyle = styled.button`
   justify-content: center;
   
   user-select: none;
-  
-  &:hover, &:focus {
-    transform: translateY(-2px);
-  }
 `
 
 const Button = ({children, textColor, background, isFullWidth, ...rest}) => {

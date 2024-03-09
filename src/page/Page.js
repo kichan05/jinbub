@@ -1,15 +1,43 @@
 import styled from "styled-components";
-import {UI_ACTION_TYPE, useUiDispatch, useUiState} from "../context/UiReducer";
+import {useUiDispatch, useUiState} from "../context/UiReducer";
 import Button from "../component/Button";
 import {PageBasicStyle} from "../style/BasicStyle";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import Input from "../component/Input";
+import {CgArrowRight} from "react-icons/cg";
+import {Sub} from "../component/Sub";
 
 const PageStyle = styled.div`
   ${PageBasicStyle};
 
   & > .content {
+    padding-top: 20px;
+  }
 
+  .problem-wrap {
+    font-size: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .message {
+    color: ${p => p.theme.color.Gray6};
+    text-align: center;
+
+    margin-top: 20px;
+  }
+
+  .input-form {
+    margin-top: 20px;
+
+    display: flex;
+    gap: 12px;
+
+    input {
+      flex: 1;
+    }
   }
 `
 
@@ -22,9 +50,6 @@ function randomChoice(array) {
 }
 
 const Page = () => {
-  const uiState = useUiState()
-  const uiDispatch = useUiDispatch()
-
   const [data, setData] = useState({
     problemNum: null,
     problemNumSystem: null,
@@ -33,18 +58,19 @@ const Page = () => {
   })
 
   const [answerInput, setAnswerInput] = useState("")
-  const onAnswerInput = (e) => {
+  const onAnswerInput = useCallback((e) => {
     setAnswerInput(e.target.value)
-  }
-  const onCheckAnswer = (e) => {
-    if(answerInput === data.answerNum) {
+  }, [])
+
+
+  const onCheckAnswer = useCallback((e) => {
+    if (answerInput === data.answerNum) {
       alert("정답")
       init()
-    }
-    else {
+    } else {
       alert("오답")
     }
-  }
+  }, [])
 
   function init() {
     let problemNumSystem, answerNumSystem
@@ -54,8 +80,8 @@ const Page = () => {
     }
 
     const problemNum_10 = random(2, 50)
-    let problemNum = problemNum_10.toString(problemNumSystem)
-    const answerNum = problemNum_10.toString(answerNumSystem)
+    let problemNum = problemNum_10.toString(problemNumSystem).toUpperCase()
+    const answerNum = problemNum_10.toString(answerNumSystem).toUpperCase()
 
     setData({
       problemNum,
@@ -75,14 +101,25 @@ const Page = () => {
   return (
     <PageStyle>
       <div className="content">
-        {data.problemNum}({data.problemNumSystem}) -> ???({data.answerNumSystem})
+        <div className="problem-wrap">
+          <b>{data.problemNum}</b> <Sub>{data.problemNumSystem}</Sub>
 
-        <br/>
-        {data.problemNum_10}
-        <br/>
-        <Input value={answerInput} onChange={onAnswerInput}/>
+          <CgArrowRight/>
 
-        <Button onClick={onCheckAnswer}>클릭</Button>
+          <b>???</b> <Sub>{data.answerNumSystem}</Sub>
+        </div>
+
+        <div className="message">
+          다음 주를 주어진 진법에 맞게 변환하세요.
+        </div>
+
+        <div className="input-form">
+          <Input
+            value={answerInput} onChange={onAnswerInput}
+            placeholder={"정답"}
+          />
+          <Button onClick={onCheckAnswer}>클릭</Button>
+        </div>
       </div>
     </PageStyle>
   )
