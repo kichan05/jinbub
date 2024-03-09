@@ -19,7 +19,7 @@ const UiSection = () => {
 
   return (
     <UiSectionStyle>
-      <Modal isShow={uiState.isModalShow}/>
+      {/*<Modal isShow={uiState.isModalShow}/>*/}
     </UiSectionStyle>
   )
 }

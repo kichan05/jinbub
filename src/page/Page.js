@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import {useUiDispatch, useUiState} from "../context/UiReducer";
 import Button from "../component/Button";
 import {PageBasicStyle} from "../style/BasicStyle";
@@ -6,6 +6,20 @@ import {useCallback, useEffect, useState} from "react";
 import Input from "../component/Input";
 import {CgArrowRight} from "react-icons/cg";
 import {Sub} from "../component/Sub";
+
+const ErrorMessageAnimation = keyframes`
+  0%, 100% {
+    transform: translateX(0);
+  }
+
+  20%, 60% {
+    transform: translateX(30px);
+  }
+
+  40%, 80% {
+    transform: translateX(-30px);
+  }
+`
 
 const PageStyle = styled.div`
   ${PageBasicStyle};
@@ -28,6 +42,28 @@ const PageStyle = styled.div`
     text-align: center;
 
     margin-top: 20px;
+  }
+
+  .error-message-wrap {
+    color: ${p => p.theme.color.Red7};
+    font-size: 1.2em;
+    font-weight: 600;
+
+    text-align: center;
+
+    margin-top: 8px;
+
+    opacity: 0;
+    transition: 100ms;
+  }
+
+  .error-animation {
+    animation-name: ${ErrorMessageAnimation};
+    animation-duration: 900ms;
+  }
+  
+  .error-show {
+    opacity: 1;
   }
 
   .input-form {
@@ -58,6 +94,11 @@ const Page = () => {
     answerNumSystem: null,
   })
 
+  const [errorAnimation, setErrorAnimation] = useState({
+    isAnimation: false,
+    isShow: false
+  })
+
   const [answerInput, setAnswerInput] = useState("")
   const onAnswerInput = useCallback((e) => {
     setAnswerInput(e.target.value)
@@ -73,7 +114,17 @@ const Page = () => {
       alert("정답")
       init()
     } else {
-      alert("오답")
+      setErrorAnimation({
+        isAnimation: true,
+        isShow: true
+      })
+
+      setTimeout(() => {
+        setErrorAnimation({
+          isAnimation: false,
+          isShow: true
+        })
+      }, 900)
     }
   }
 
@@ -96,6 +147,10 @@ const Page = () => {
       answerNumSystem,
     })
 
+    setErrorAnimation({
+      isAnimation: false,
+      isShow: false
+    })
     setAnswerInput("")
   }
 
@@ -116,6 +171,10 @@ const Page = () => {
 
         <div className="message">
           다음 주를 주어진 진법에 맞게 변환하세요.
+        </div>
+
+        <div className={`error-message-wrap ${(errorAnimation.isAnimation) && 'error-animation'} ${(errorAnimation.isShow) && 'error-show'}`}>
+          <span>틀렸습니다.</span>
         </div>
 
         <div className="input-form">
