@@ -47,7 +47,7 @@ const PageStyle = styled.div`
   }
   
   .answer {
-    color: ${p => p.theme.color.Blue4};
+    color: ${p => p.theme.color.HeechanBlue};
   }
 
   .error-message-wrap {
