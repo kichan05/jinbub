@@ -25,7 +25,7 @@ const PageStyle = styled.div`
   ${PageBasicStyle};
 
   & > .content {
-    padding: 20px 0;
+    padding: 20px 12px;
     min-height: calc(100 * var(--vh) - var(--header-height) - var(--footer-height));
   }
 
@@ -47,7 +47,7 @@ const PageStyle = styled.div`
   }
   
   .answer {
-    color: ${p => p.theme.color.Blue4};
+    color: ${p => p.theme.color.HeechanBlue};
   }
 
   .error-message-wrap {
@@ -114,6 +114,8 @@ const Page = () => {
 
 
   const onCheckAnswer = e => {
+    e.preventDefault()
+
     if (answerInput.length <= 0) {
       return
     }
@@ -197,13 +199,13 @@ const Page = () => {
           <span>틀렸습니다.</span>
         </div>
 
-        <div className="input-form">
+        <form className="input-form" onSubmit={onCheckAnswer}>
           <Input
             value={answerInput} onChange={onAnswerInput}
             placeholder={"정답"}
           />
-          <Button onClick={onCheckAnswer}>입력</Button>
-        </div>
+          <Button type={"submit"}>입력</Button>
+        </form>
       </div>
     </PageStyle>
   )

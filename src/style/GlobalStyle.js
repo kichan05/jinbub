@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
   ${FontStyle}
   
   *, *::before, *::after {
-    font-family: SUIT, serif;
+    word-break: keep-all;
   }
   
   body {
