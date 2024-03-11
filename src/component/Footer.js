@@ -11,6 +11,9 @@ const FooterStyle = styled.footer`
 
     padding: 12px;
     margin: 0 auto;
+    & > * {
+      margin-top: 4px;
+    }
   }
 `
 
@@ -26,7 +29,7 @@ const Footer = () => {
     <FooterStyle>
       <div ref={footerElement}>
         <div>
-          <b>개발</b> : <a href={"https://kichan.dev"} target={"_blank"}>박희찬 (인천대학교 정보통신공학과 24학번)</a>
+          <b>개발</b> : <a href={"https://kichan.dev"} target={"_blank"}>박희찬 <br/>(인천대학교 정보통신공학과 24학번)</a>
         </div>
         <div>
           <b>오픈소스 프로젝트</b> : <a href="https://github.com/kichan05/jinbub" target={"_blank"}>깃허브</a>

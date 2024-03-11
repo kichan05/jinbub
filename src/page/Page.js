@@ -25,7 +25,7 @@ const PageStyle = styled.div`
   ${PageBasicStyle};
 
   & > .content {
-    padding: 20px 0;
+    padding: 20px 12px;
     min-height: calc(100 * var(--vh) - var(--header-height) - var(--footer-height));
   }
 
