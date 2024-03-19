@@ -82,6 +82,19 @@ const PageStyle = styled.div`
       flex: 1;
     }
   }
+  
+  h2 {
+    font-size: 1.5em;
+    
+    margin-top: 24px;
+  }
+  
+  .log .problem-wrap {
+    padding: 8px 0;
+    font-size: 1.7em;
+    
+    border-bottom: 1px solid ${p => p.theme.color.Gray5};
+  }
 `
 
 function random(start, until) {
@@ -129,7 +142,7 @@ const Page = () => {
         isShow: false
       })
 
-      setLog([...log, data])
+      setLog([data, ...log])
 
       setTimeout(() => {
         init()
@@ -213,18 +226,18 @@ const Page = () => {
           <Button type={"submit"}>입력</Button>
         </form>
 
-        {/*<h2>기록</h2>*/}
-        {/*<ul>*/}
-        {/*  {log.map(i => (*/}
-        {/*    <li className={"problem-wrap"}>*/}
-        {/*      <b>{i.problemNum}</b> <Sub>{i.problemNumSystem}</Sub>*/}
+        <h2>기록</h2>
+        <ul className={"log"}>
+          {log.map(i => (
+            <li className={"problem-wrap"}>
+              <b>{i.problemNum}</b> <Sub>{i.problemNumSystem}</Sub>
 
-        {/*      <CgArrowRight/>*/}
+              <CgArrowRight/>
 
-        {/*      <b>{i.answerNum}</b> <Sub>{i.answerNumSystem}</Sub>*/}
-        {/*    </li>*/}
-        {/*  ))}*/}
-        {/*</ul>*/}
+              <b>{i.answerNum}</b> <Sub>{i.answerNumSystem}</Sub>
+            </li>
+          ))}
+        </ul>
       </div>
     </PageStyle>
   )
