@@ -213,18 +213,18 @@ const Page = () => {
           <Button type={"submit"}>입력</Button>
         </form>
 
-        <h2>기록</h2>
-        <ul>
-          {log.map(i => (
-            <li className={"problem-wrap"}>
-              <b>{i.problemNum}</b> <Sub>{i.problemNumSystem}</Sub>
+        {/*<h2>기록</h2>*/}
+        {/*<ul>*/}
+        {/*  {log.map(i => (*/}
+        {/*    <li className={"problem-wrap"}>*/}
+        {/*      <b>{i.problemNum}</b> <Sub>{i.problemNumSystem}</Sub>*/}
 
-              <CgArrowRight/>
+        {/*      <CgArrowRight/>*/}
 
-              <b>{i.answerNum}</b> <Sub>{i.answerNumSystem}</Sub>
-            </li>
-          ))}
-        </ul>
+        {/*      <b>{i.answerNum}</b> <Sub>{i.answerNumSystem}</Sub>*/}
+        {/*    </li>*/}
+        {/*  ))}*/}
+        {/*</ul>*/}
       </div>
     </PageStyle>
   )
