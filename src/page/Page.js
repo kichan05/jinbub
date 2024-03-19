@@ -35,17 +35,17 @@ const PageStyle = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    
+
     transition: 200ms;
   }
-  
+
   .message {
     color: ${p => p.theme.color.Gray6};
     text-align: center;
 
     margin-top: 20px;
   }
-  
+
   .answer {
     color: ${p => p.theme.color.HeechanBlue};
   }
@@ -67,7 +67,7 @@ const PageStyle = styled.div`
     animation-name: ${ErrorMessageAnimation};
     animation-duration: 900ms;
   }
-  
+
   .error-show {
     opacity: 1;
   }
@@ -100,6 +100,8 @@ const Page = () => {
     answerNumSystem: null,
   })
 
+  const [log, setLog] = useState([])
+
   const [errorAnimation, setErrorAnimation] = useState({
     isAnimation: false,
     isShow: false
@@ -127,6 +129,8 @@ const Page = () => {
         isShow: false
       })
 
+      setLog([...log, data])
+
       setTimeout(() => {
         init()
       }, 1000)
@@ -152,7 +156,7 @@ const Page = () => {
       answerNumSystem = randomChoice([2, 8, 10, 16])
     }
 
-    const problemNum_10 = random(2, 50)
+    const problemNum_10 = random(10, 50)
     let problemNum = problemNum_10.toString(problemNumSystem).toUpperCase()
     const answerNum = problemNum_10.toString(answerNumSystem).toUpperCase()
 
@@ -187,6 +191,7 @@ const Page = () => {
               <CgArrowRight/>
 
               <b>???</b> <Sub>{data.answerNumSystem}</Sub>
+              {/*{data.answerNum}*/}
             </>
           ) : <h1>정답</h1>}
         </div>
@@ -195,7 +200,8 @@ const Page = () => {
           다음 수를 주어진 진법에 맞게 변환하세요.
         </div>
 
-        <div className={`error-message-wrap ${(errorAnimation.isAnimation) && 'error-animation'} ${(errorAnimation.isShow) && 'error-show'}`}>
+        <div
+          className={`error-message-wrap ${(errorAnimation.isAnimation) && 'error-animation'} ${(errorAnimation.isShow) && 'error-show'}`}>
           <span>틀렸습니다.</span>
         </div>
 
@@ -206,6 +212,19 @@ const Page = () => {
           />
           <Button type={"submit"}>입력</Button>
         </form>
+
+        <h2>기록</h2>
+        <ul>
+          {log.map(i => (
+            <li className={"problem-wrap"}>
+              <b>{i.problemNum}</b> <Sub>{i.problemNumSystem}</Sub>
+
+              <CgArrowRight/>
+
+              <b>{i.answerNum}</b> <Sub>{i.answerNumSystem}</Sub>
+            </li>
+          ))}
+        </ul>
       </div>
     </PageStyle>
   )
